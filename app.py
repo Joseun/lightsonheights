@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ NEWS POST CLASSIFIER MODULE"""
 import pickle
-import sklearn
 import requests
 import streamlit as st
 import time
