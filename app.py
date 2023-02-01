@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 """ NEWS POST CLASSIFIER MODULE"""
+import pandas as pd
 import pickle
 import requests
 import streamlit as st
 import time
 import warnings
+from xgboost import XGBClassifier
 
 from datetime import date
 from streamlit_lottie import st_lottie, st_lottie_spinner
@@ -31,8 +33,9 @@ lottie_book = load_lottieurl("https://assets9.lottiefiles.com/packages/lf20_zn4i
 st_lottie(lottie_book, speed=1, height=200, key="initial")
 
 # loading in the model to predict on the data
-with open('model.pkl', 'rb') as f:
-        model = pickle.load(f)
+model = XGBClassifier()
+
+model.load_model("model.json")
 with open('tokenizer.pkl', 'rb') as f:
         tokenizer = pickle.load(f)
 
@@ -50,6 +53,8 @@ def prediction(text: str) -> int:
         integer: 1 or 0
     """
     X = tokenizer.transform([text]).toarray()
+    # st.write(tokenizer.get_feature_names_out())
+    X = pd.DataFrame(X, columns=tokenizer.get_feature_names_out())
     prediction = model.predict(X)
     # print(prediction)
     return prediction
@@ -107,7 +112,6 @@ def main():
     # the below line ensures that when the button called 'Predict' is clicked,
     # the prediction function defined above is called to make the prediction
     # and store it in the variable result
-
     result = ""
     lottie_load = load_lottieurl("https://assets5.lottiefiles.com/private_files/lf30_fup2uejx.json")
     if st.button("Check"):
