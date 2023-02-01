@@ -1,76 +1,35 @@
-# Source Based Fake News Classification.
+# Project Title
+Source Based Fake News Classification.
 
-Social media is a vast pool of content, and among all the content available for users to access, news is an element that is accessed most frequently. This news can be posted by politicians, news channels, newspaper websites, or even common civilians. These posts must be checked for their authenticity, since spreading misinformation has been a real concern in today’s times, and many
-firms are taking steps to make the common people aware of the consequences of spreading misinformation.The measure of authenticity of the news posted online
-cannot be definitively measured, since the manual classification of news is tedious and time-consuming and is also subject to bias.
+# Project Description
+Social media is a vast pool of content, and among all the content available for users to access, news is an element that is accessed most frequently. This news can be posted by politicians, news channels, newspaper websites, or even common civilians. These posts must be checked for their authenticity, since spreading misinformation has been a real concern in today’s times, and many firms are taking steps to make the common people aware of the consequences of spreading misinformation. The measure of authenticity of the news posted online cannot be definitively measured, since the manual classification of news is tedious and time-consuming and is also subject to bias.
 
-## Getting Started
+## Project
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
-### Prerequisites
-
-What things you need to install the software and how to install them
-
-- [Conda](https://docs.conda.io/en/latest/miniconda.html)
-- [Python 3.9.* and above](https://www.python.org/) 
-
-### Installing
-
-A step by step series of examples that tell you how to get a development environment running
-
-1. Create a new conda environment using the following command:<br>
-`conda create -n myenv`</br>
-
-2. Activate the new environment:<br>
-`conda activate myenv`</br>
-
-3. Install the required packages using the following command:<br>
-`conda install --file requirements.txt`</br>
-4. Clone the repository and navigate to the project directory:<br>
-`git clone https://github.com/Joseun/reconcileai_mvp.git`</br>
-`cd reconcile_mvp`</br>
-
-5. Run the script using the following command:<br>
-`D:/Anaconda/python.exe reconcileai_bert.py`</br>
-
+This repository contains a Python Streamlit application for analyzing news data, as well as Jupyter Notebooks for building the model.
 
 ## Built With
 
 * [Python](https://www.python.org/) - The programming language used
-* [Conda](https://docs.conda.io/en/latest/) - Dependency Management
-
-
+* [Streamlit](https://streamlit.io/) - The framework used 
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Python](https://www.python.org/) - The programming language used
-* [Conda](https://docs.conda.io/en/latest/) - Dependency Management
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/username/projectname/contributing) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/username/projectname/tags).
+Click here to get to the deployed [News Post Checker Application](https://news-post-checker.onrender.com/)
 
 ## Authors
 
-* **Your Name** - *Initial work* - [username](https://github.com/username)
+* **Joseph Ologunja** - *Initial work* - [Joseun](https://github.com/joseun)
 
-See also the list of [contributors](https://github.com/username/projectname/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Inspiration
-* etc
-
+## Repository Structure
+| Folder/Code | Content |
+| ------------- | ------------- |
+| .streamlit | Contains the config.toml to set certain design parameters |
+| Train data | Contains the data used in training the model CSV format |
+| Test data | Contains the data used in test the model excel format |
+| Submission | Contains the labelled test data using the model in excel format |
+| News_Classfication.ipynb | Contains the code for data exploration, analysis, visualization and model building |
+| app.py | Contains the actual Streamlit application |
+| model | Contains the trained model in pickled format |
+| tokenizer | Contains the tokenizer in pickled format |
+| requirements.txt | Contains all requirements (necessary for Streamlit deployment) |
