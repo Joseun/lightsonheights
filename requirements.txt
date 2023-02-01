@@ -2,3 +2,5 @@ streamlit==1.12.0
 streamlit-lottie==0.0.3
 scikit-learn
 xgboost
+scipy
+numpy
