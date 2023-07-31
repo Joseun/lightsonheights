@@ -1,19 +1,20 @@
 #!/usr/bin/python3
 """ NEWS POST CLASSIFIER MODULE"""
-import pandas as pd
+import time
 import pickle
+import warnings
+from datetime import date
+
+import pandas as pd
 import requests
 import streamlit as st
-import time
-import warnings
 from xgboost import XGBClassifier
-
-from datetime import date
 from streamlit_lottie import st_lottie, st_lottie_spinner
 
 warnings.filterwarnings("ignore")
 
 st.set_page_config(page_title="News Post Checker App", layout="wide")
+
 
 def load_lottieurl(url: str):
     """Sends a request for gifs and icons
@@ -21,7 +22,7 @@ def load_lottieurl(url: str):
     Args:
         url: string of url for lottie content
 
-    Return: 
+    Return:
         object: json
     """
     r = requests.get(url)
@@ -29,7 +30,10 @@ def load_lottieurl(url: str):
         return None
     return r.json()
 
-lottie_book = load_lottieurl("https://assets9.lottiefiles.com/packages/lf20_zn4imzfv.json")
+
+lottie_book = load_lottieurl(
+    "https://assets9.lottiefiles.com/packages/lf20_zn4imzfv.json"
+)
 st_lottie(lottie_book, speed=1, height=200, key="initial")
 
 # loading in the model to predict on the data
@@ -37,11 +41,12 @@ model = XGBClassifier()
 
 model.load_model("model.json")
 with open('tokenizer.pkl', 'rb') as f:
-        tokenizer = pickle.load(f)
+    tokenizer = pickle.load(f)
 
 
 # defining the function which will make the prediction using
 # the data which the user inputs
+
 
 def prediction(text: str) -> int:
     """Classifies text to 1 or 0
@@ -49,7 +54,7 @@ def prediction(text: str) -> int:
     Args:
         text: text from user
 
-    Return: 
+    Return:
         integer: 1 or 0
     """
     X = tokenizer.transform([text]).toarray()
@@ -61,6 +66,7 @@ def prediction(text: str) -> int:
 
 
 # this is the main function in which we define our webpage
+
 
 def main():
     # here we define some of the front end elements of the web page like
@@ -85,7 +91,8 @@ def main():
         spreading misinformation has been a real concern in today’s times, and many firms are taking steps to make the common people aware of the consequences of \
         spreading misinformation.</h3>
     </div>
-        """, unsafe_allow_html=True
+        """,
+        unsafe_allow_html=True,
     )
     st.markdown(
         """ 
@@ -94,7 +101,8 @@ def main():
         Check the authenticity of a news post. Just fill in the details below👇
         </h4>
     </div>
-    """, unsafe_allow_html=True
+    """,
+        unsafe_allow_html=True,
     )
 
     # the following lines create widgets in which the user can enter
@@ -103,17 +111,38 @@ def main():
     published = st.date_input('Date Published', date.today())
     title = st.text_input("Title", value="", placeholder="Enter title here")
     text = st.text_area("Text", value="", placeholder="Enter news text here")
-    language = st.selectbox('Language', ('English', 'Ignore', 'German', 'French', 'Others'))
+    language = st.selectbox(
+        'Language', ('English', 'Ignore', 'German', 'French', 'Others')
+    )
     site_url = st.text_input("Site Url", value="", placeholder="Enter site url here")
-    main_img_url = st.text_input("Main Image Url", value="", placeholder="Enter the url of the main image on the site here")
-    genre =  st.selectbox('Type', ('Bias', 'Conspiracy', 'Fake', 'BS', 'Satire', 'Hate', 'Junksci', 'State', 'Others'))
+    main_img_url = st.text_input(
+        "Main Image Url",
+        value="",
+        placeholder="Enter the url of the main image on the site here",
+    )
+    genre = st.selectbox(
+        'Type',
+        (
+            'Bias',
+            'Conspiracy',
+            'Fake',
+            'BS',
+            'Satire',
+            'Hate',
+            'Junksci',
+            'State',
+            'Others',
+        ),
+    )
     text = author + " " + title + " " + text + " " + site_url + " " + main_img_url
-    
+
     # the below line ensures that when the button called 'Predict' is clicked,
     # the prediction function defined above is called to make the prediction
     # and store it in the variable result
     result = ""
-    lottie_load = load_lottieurl("https://assets5.lottiefiles.com/private_files/lf30_fup2uejx.json")
+    lottie_load = load_lottieurl(
+        "https://assets5.lottiefiles.com/private_files/lf30_fup2uejx.json"
+    )
     if st.button("Check"):
         with st_lottie_spinner(lottie_load, speed=1, height=100, key="load"):
             time.sleep(2)
@@ -127,6 +156,7 @@ def main():
             else:
                 result = 'inaccurate'
                 st.error(f"This news post seems {result}", icon="🚨")
+
 
 if __name__ == '__main__':
     main()
