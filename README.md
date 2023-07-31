@@ -6,13 +6,15 @@ Social media is a vast pool of content, and among all the content available for 
 
 ## Project
 
-This repository contains a Python Streamlit application for analyzing news data, as well as Jupyter Notebooks for building the model.
+This repository contains a Python Streamlit application for analyzing news data, as well as Jupyter Notebooks for building the model. It also contains with python pipelines for preprocessing, training, monitoring model inferences 
 
 ## Built With
 
 * [Python](https://www.python.org/) - The programming language used
 * [Streamlit](https://streamlit.io/) - The framework used 
-
+* [Mlflow](https://mlflow.org/) - For experiment tracking
+* [Prefect](https://www.prefect.io/opensource/) - For workflow orchestration
+* [Evidently](https://www.evidentlyai.com/) - For model monitoring
 ## Deployment
 
 Click here to get to the deployed [News Post Checker Application](https://news-post-checker.onrender.com/)
